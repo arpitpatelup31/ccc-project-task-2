@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Carousel</title>
+  <link rel="stylesheet" href="style2.css">
+  
+</head>
+<body>
+ <div class="carousel-container">
+    <!-- Slide 1 -->
+    <div class="slide active-slide" data-index="0">
+      <img src="https://picsum.photos/700/350?random=1" alt="Image 1">
+      <div class="stars">
+        <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+      </div>
+      <div class="label">No rating yet</div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide" data-index="1">
+      <img src="https://picsum.photos/700/350?random=2" alt="Image 2">
+      <div class="stars">
+        <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+      </div>
+      <div class="label">No rating yet</div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide" data-index="2">
+      <img src="https://picsum.photos/700/350?random=3" alt="Image 3">
+      <div class="stars">
+        <span class="star" data-value="1">&#9733;</span>
+        <span class="star" data-value="2">&#9733;</span>
+        <span class="star" data-value="3">&#9733;</span>
+        <span class="star" data-value="4">&#9733;</span>
+        <span class="star" data-value="5">&#9733;</span>
+      </div>
+      <div class="label">No rating yet</div>
+    </div>
+
+    <!-- Arrows -->
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+  </div>
+
+  <script>
+    // Carousel Logic
+    let slideIndex = 0;
+    const slides = document.querySelectorAll(".slide");
+
+    function showSlide(n) {
+      slides.forEach(s => s.classList.remove("active-slide"));
+      slideIndex = (n + slides.length) % slides.length;
+      slides[slideIndex].classList.add("active-slide");
+    }
+
+    document.querySelector(".prev").addEventListener("click", () => showSlide(slideIndex - 1));
+    document.querySelector(".next").addEventListener("click", () => showSlide(slideIndex + 1));
+
+    // Ratings per slide
+    const ratings = Array(slides.length).fill(0); // store ratings
+
+    slides.forEach((slide, i) => {
+      const stars = slide.querySelectorAll(".star");
+      const label = slide.querySelector(".label");
+
+      function updateStars(rating) {
+        stars.forEach(star => {
+          star.classList.toggle("active", star.dataset.value <= rating);
+        });
+        label.textContent = rating > 0 ? `You rated: ${rating}/5` : "No rating yet";
+      }
+
+      stars.forEach(star => {
+        // Hover effect
+        star.addEventListener("mouseover", () => {
+          const val = parseInt(star.dataset.value);
+          stars.forEach(s => s.classList.toggle("active", s.dataset.value <= val));
+        });
+        star.addEventListener("mouseout", () => updateStars(ratings[i]));
+
+        // Click to set / unset rating
+        star.addEventListener("click", () => {
+          const val = parseInt(star.dataset.value);
+          ratings[i] = (ratings[i] === val) ? 0 : val; // toggle
+          updateStars(ratings[i]);
+        });
+      });
+
+      updateStars(ratings[i]); // init
+    });
+  </script>
+</body>
+</html>
+

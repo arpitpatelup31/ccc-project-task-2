@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Website Image Slider</title>
+    <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!--navbar--> 
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo">
+          <img src="images/logo.jpeg" height="60px" alt="logo">
+          <h2>Coffee Store</h2>
+        </div>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="login.html">Registration Form</a></li>
+          <li><a href="carousel.html">Carousel</a></li>
+        </ul>
+      </div>
+    </nav>
+    <section class="main swiper mySwiper">
+      <div class="wrapper swiper-wrapper">
+        <div class="slide swiper-slide">
+          <img src="images/img1.jpg" alt="" class="image" />
+          <div class="image-data">
+            <span class="text">Enjoy the finest coffee drinks.</span>
+            <h2>
+              Enjoy Our Exclusive <br />
+              Coffee and Cocktails
+            </h2>
+            <a href="#" class="button">About Us</a>
+          </div>
+        </div>
+        <div class="slide swiper-slide">
+          <img src="images/img2.jpg" alt="" class="image" />
+          <div class="image-data">
+            <span class="text">We really like what we do.</span>
+            <h2>
+              Coffee Beans with a <br />
+              Perfect Aroma
+            </h2>
+            <a href="#" class="button">About Us</a>
+          </div>
+        </div>
+        <div class="slide swiper-slide">
+          <img src="images/img3.jpg" alt="" class="image" />
+          <div class="image-data">
+            <span class="text">Making Our coffee with lover.</span>
+            <h2>
+              Alluring and Fragrant <br />
+              Coffee Aroma
+            </h2>
+            <a href="#" class="button">About Us</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="swiper-button-next nav-btn"></div>
+      <div class="swiper-button-prev nav-btn"></div>
+      <div class="swiper-pagination"></div>
+    </section>
+    
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+     
+        window.onload = () => loadPage("form.html", document.querySelector("nav button"));
+
+
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
+  </body>
+</html>
